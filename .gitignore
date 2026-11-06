@@ -1,0 +1,16 @@
+node_modules/
+dist/
+target/
+.tools/
+.env
+.env.*
+!.env.example
+.netlify/
+.cache/
+playwright-report/
+test-results/
+supabase/.temp/
+supabase/.branches/
+*.log
+__pycache__/
+*.pyc

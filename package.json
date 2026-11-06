@@ -1,0 +1,39 @@
+{
+  "name": "campusflow",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "frontend"
+  ],
+  "engines": {
+    "node": "24.x",
+    "npm": "11.x"
+  },
+  "packageManager": "npm@11.9.0",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:frontend": "npm run dev --workspace @campusflow/frontend",
+    "dev:backend": "node scripts/backend.mjs",
+    "build:frontend": "npm run build --workspace @campusflow/frontend",
+    "package:netlify": "npm run build:frontend && python3 scripts/package-netlify.py",
+    "package:sites": "npm run build:frontend && python3 scripts/package-sites.py",
+    "build:backend": "bash scripts/maven.sh -f backend/pom.xml package -DskipTests",
+    "build": "npm run build:frontend && npm run build:backend",
+    "typecheck": "npm run typecheck --workspace @campusflow/frontend",
+    "test": "bash scripts/maven.sh -f backend/pom.xml verify",
+    "test:e2e": "npm run test:e2e --workspace @campusflow/frontend",
+    "test:certificates": "python3 -m unittest discover -s scripts -p test_canvas_certificates.py",
+    "check": "npm run typecheck && npm test && npm run build:frontend",
+    "db:start": "node scripts/supabase.mjs start -x realtime,storage-api,imgproxy,mailpit,postgres-meta,studio,edge-runtime,logflare,vector,supavisor",
+    "db:stop": "node scripts/supabase.mjs stop",
+    "db:status": "node scripts/supabase.mjs status",
+    "test:db": "bash supabase/tests/run-isolated.sh",
+    "test:db:native": "bash supabase/tests/run-native-isolated.sh",
+    "test:integration": "node frontend/e2e/local-supabase.mjs"
+  },
+  "devDependencies": {
+    "netlify-cli": "27.16.2",
+    "supabase": "3.0.0"
+  }
+}

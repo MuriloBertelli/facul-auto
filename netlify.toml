@@ -1,0 +1,30 @@
+[build]
+  base = "."
+  command = "npm run build:frontend"
+  publish = "frontend/dist"
+
+[build.environment]
+  NODE_VERSION = "24.22.1"
+  NPM_VERSION = "11.9.0"
+
+# Este site hospeda apenas o frontend. A API Java fica em um host JVM separado.
+# Configure VITE_API_BASE_URL com a origem HTTPS real desse backend antes do build.
+# Não devolver a SPA como resposta de uma API ausente.
+[[redirects]]
+  from = "/api/*"
+  to = "/api-unavailable.json"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
