@@ -1,4 +1,4 @@
-# Celular e preparação das publicações
+# Celular e publicações
 
 ## Implementado localmente
 
@@ -16,7 +16,9 @@ Verificação realizada em 05/11/2026, America/Sao_Paulo:
 | `bash scripts/local.sh npm run test:e2e` | 13 cenários aprovados, sem fixture hospedada |
 | Celular autenticado em 320/360/390/430 px | Busca, filtros, nome longo, diálogo, sessão após reload e logout aprovados; sem overflow horizontal |
 | `python3 -m unittest discover -s scripts -p test_canvas_certificates.py` | 10 cenários aprovados, sem acesso externo |
-| Revisão de leitura do plano Poliweek real | 3 atividades/5 anexos validados, zero POST |
+| Revisão de leitura do plano Poliweek real | 3 atividades/5 anexos validados antes dos envios |
+| Execução autorizada Poliweek | 3 recibos confirmados; 5 anexos; duas entregas existentes preservadas |
+| Sincronização posterior | 82 atividades: 48 pendentes e 34 concluídas; 10 entregas em grupo |
 | Servidor pessoal restaurado | Health OK, Supabase/Canvas configurados, entregas desabilitadas |
 
 Os cenários incluem preservação das entregas de grupo e anotações, falhas de
@@ -33,7 +35,7 @@ conferidas e permaneceram inalteradas. Plano, validação e recibos permanecem
 no cache privado, fora do Git. A publicação dos fontes pode prosseguir.
 Cada nova entrega continua exigindo validação específica.
 
-Depois dos recibos confirmados:
+Procedimento de publicação autorizado:
 
 1. Atualizar/sincronizar os dados do organizador.
 2. Publicar os fontes reais no repositório GitHub já existente,
@@ -50,11 +52,15 @@ Depois dos recibos confirmados:
 
 Identidade registrada e preservada em `.openai/hosting.json`:
 `appgprj_6aed3c668ac88191a27361f25f3107f6`.
-Ainda sem versão publicada. Não chamar `create_site` novamente.
+Publicado com sucesso em 05/11/2026, às 23h57 (America/Sao_Paulo),
+com audiência privada para a conta proprietária. Não chamar `create_site` novamente.
 
-Origem esperada, **ainda não publicada**:
+URL publicada:
 `https://campusflow-murilobertelli.mrlbertelli.chatgpt.site`.
-O site de referência do amigo não foi alterado.
+O site de referência do amigo não foi alterado. No primeiro acesso, é preciso
+entrar na conta ChatGPT proprietária. A sessão Supabase do aplicativo continua
+separada por origem. O retorno exato do Sites foi adicionado à allowlist Auth
+do Supabase, preservando Netlify e as duas origens locais.
 
 ```bash
 bash scripts/local.sh npm run build:frontend
@@ -66,6 +72,32 @@ no manifest. Usar o source helper do plugin Sites nesse mesmo checkout para
 commit/push e pacote; passar credencial por stdin, sem arquivos/argumentos.
 Depois usar a operação de publicação privada com o SHA e archive exatos.
 Renovar a credencial de fonte se expirada, sem criar outro Site.
+
+## Estado GitHub e Netlify
+
+Os 90 arquivos de fonte foram publicados em `MuriloBertelli/facul-auto`,
+branch `main`; o checkout local mantém os mesmos commits, árvore e `origin`.
+Nenhum segredo ou PDF acadêmico foi incluído.
+
+O frontend responsivo foi publicado no site Netlify existente em 06/11/2026,
+às 00h02 (America/Sao_Paulo), deploy `6aed433244d5f6f47c51db29`.
+As respostas HTTPS e os bytes dos assets JS/CSS foram conferidos contra o
+build local. As cinco atividades Poliweek aparecem como entregues no site.
+
+A ligação contínua GitHub → Netlify foi configurada em 07/11/2026. O usuário
+concluiu a autenticação e autorizou explicitamente o acesso do aplicativo
+Netlify a `facul-auto`, preservando os dois repositórios já selecionados.
+O site existente agora aponta para `MuriloBertelli/facul-auto`, branch `main`,
+com base na raiz, build `npm run build:frontend`, publicação `frontend/dist`
+e nenhuma função do backend antigo. As variáveis públicas existentes foram
+preservadas. Não foi contratado plano pago nem criado outro site Netlify.
+
+O primeiro build a partir do repositório usa o commit `5b9ef0f`. Esta atualização
+da documentação também é publicada no GitHub para verificar o disparo de um
+novo deploy pela integração. Conferir a associação entre commit e deploy no
+painel Netlify; registros finais de implantação ficam no cache privado local.
+A publicação automática vale para pushes na branch `main`; o Sites mantém
+sua própria publicação e a audiência privada existente.
 
 ## Limitação que permanece
 

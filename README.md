@@ -9,7 +9,8 @@ Veja o [estado das publicações](docs/MOBILE_E_PUBLICACAO.md) e o
 [procedimento de acesso e entregas validadas](docs/ACESSO_E_ENTREGAS.md).
 O pedido posterior de GitHub → Netlify automático e Sites substitui a exclusão
 histórica de CI/CD descrita abaixo. Os três envios Poliweek foram validados
-pelo usuário e confirmados pelo Canvas; a publicação pode prosseguir.
+pelo usuário e confirmados pelo Canvas. Os frontends estão publicados e o
+deploy contínuo GitHub → Netlify está configurado.
 
 ## Execução neste computador
 
@@ -25,10 +26,16 @@ bash scripts/local.sh npm run dev
 ```
 
 Abra `http://127.0.0.1:8888`. A API usa `http://127.0.0.1:8080`.
-O frontend também foi publicado manualmente em
+O frontend está publicado em
 [campusflow-murilobertelli.netlify.app](https://campusflow-murilobertelli.netlify.app),
-conectado ao Supabase. A API Java permanece local; o host de produção ainda
-precisa ser escolhido. Entregas Canvas continuam desabilitadas.
+conectado ao Supabase, e no [Sites privado](https://campusflow-murilobertelli.mrlbertelli.chatgpt.site).
+O código está no [GitHub](https://github.com/MuriloBertelli/facul-auto).
+O site Netlify está ligado à branch `main`: cada alteração publicada no GitHub
+dispara o build e a atualização do sistema. O Sites usa o mesmo projeto e tem
+publicação própria pelo plugin Sites.
+A API Java permanece local; o host de produção ainda precisa ser escolhido.
+Os três envios Poliweek aprovados foram confirmados via procedimento local;
+entregas continuam desabilitadas por padrão na API.
 O launcher fixa Node/npm e usa um cache Linux em `~/.cache/campusflow-local`,
 com `node_modules` montado somente no namespace do comando. Não cria outro
 checkout nem altera ferramentas globais. O restante deste README inclui o
